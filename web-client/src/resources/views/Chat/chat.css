@@ -1,0 +1,348 @@
+.chat_container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    overflow: hidden !important;
+}
+
+/* nav_messages */
+.nav_messages {
+    width: 350px;
+    background-color: var(--purple-background);
+}
+
+.nav_messages_top_fixe {
+    width: 100%;
+    height: 75px;
+    background-color: var(--purple-top);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 .8rem;
+    animation: down .5s;
+}
+
+.nav_messages_top_fixe.chat_display_top_fixed_p {
+    height: 70px;
+}
+
+.nav_messages_top_fixe_perfil {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nav_messages_top_fixe_perfil_avatar {
+    width: 45px;
+    height: 45px;
+    position: relative;
+}
+
+.nav_messages_top_fixe_perfil_badge {
+    position: relative;
+    margin-top: -13px;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    color: transparent;
+    box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.25);
+}
+
+.nav_messages_top_fixe_perfil_info {
+    display: flex;
+    flex-direction: column;
+    margin-left: .5rem;
+}
+
+.nav_messages_top_fixe_perfil_info h2 {
+    font-size: 16px;
+    color: var(--white);
+}
+
+.nav_messages_top_fixe_perfil_info span {
+    font-size: 12px;
+    color: var(--white);
+}
+
+.nav_messages_top_fixe_menu {
+    color: var(--white);
+}
+
+.nav_messages_top_fixe_menu svg {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+/* nav_messages_section */
+.nav_messages_section {
+    height: 100%;
+    padding: 0 .8rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.section_message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--white);
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+
+.section_message h1 {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 300;
+}
+
+.section_message svg {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+/* contacts_messages */
+.contacts_messages {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+
+    height: 85vh;
+}
+
+.friend_contact {
+    margin: .7rem 0;
+
+    display: flex;
+    cursor: pointer;
+}
+
+.friend_contact:last-child {
+    margin-bottom: 2rem;
+}
+
+.friend_contact_avatar {
+    width: 35px;
+    height: 35px;
+}
+
+.friend_contact_badge {
+    position: relative;
+    margin-top: -10px;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+    color: transparent;
+    box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.25);
+}
+
+.friend_contact_name {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: .8rem;
+    width: 175px;
+}
+
+.friend_contact_name span {
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* chat_display */
+.chat_display {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* chat_display_top_fixed */
+.chat_display_top_fixed {
+    height: 70px;
+    background-color: var(--purple-top);
+    animation: down .5s;
+}
+
+/* chat_display_area */
+.chat_display_area {
+    height: 100%;
+    background-image: url("../../assets/images/back.png");
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap:wrap-reverse;
+    overflow-y: auto;
+}
+
+.message_display {
+    min-height: 100%;
+    max-width: 78vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    overflow-y: auto;
+    animation: up .5s;
+}
+
+.message-row {
+    display: grid;
+    grid-template-columns: 70%;
+    margin-bottom: 10px;
+}
+
+.you-message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.other-message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.message-text {
+    padding: 9px 14px;
+    margin-bottom: 5px;
+    max-width: 50%;
+}
+
+.message-time {
+    font: 13px;
+    color: #777;
+}
+
+.you-message .message-text {
+    background-color: #00BFA5;
+    color: #fff;
+    border-radius: 10px 0 10px 10px
+}
+
+.other-message .message-text {
+    background-color: #d9d9d9;
+    color: #111;
+    border-radius: 0 10px 10px 10px
+}
+
+.message-title span {
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: 600
+}
+
+/* chat_window_emoji_area */
+.chat_window_emoji_area {
+    width: 100%;
+    overflow-y: auto;
+    transition: all 0.5s ease-in-out;
+}
+
+.chat_window_emoji_area .emoji-picker-react {
+    width: auto;
+    background: none;
+}
+
+/* chat_send */
+.chat_send {
+    width: 100%;
+}
+
+.chat_send_events {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 .8rem;
+    height: 70px;
+
+    border: 1px solid ble;
+}
+
+.emoji_picker_chat svg, .send_picker svg {
+    width: 30px;
+    height: 30px;
+    color: var(--border-grey);
+    cursor: pointer;
+}
+
+.emoji_picker_chat svg:hover, .send_picker svg:hover {
+    color: var(--green-pallete);
+}
+
+.message_input_display {
+    width: 100%;
+    margin: 0 1rem;
+}
+
+.message_input_display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input_message {
+    height: 45px;
+    width: 100%;
+    border: 1px solid var(--border-grey);
+    border-radius: 6px;
+    font-size: 16px;
+    resize: horizontal;
+    padding: .7rem .8rem;
+}
+
+.input_message::placeholder {
+    color: var(--text-place);
+}
+
+@media(max-width: 700px) {
+    .nav_messages {
+        width: 0;
+        display: none;
+    }
+
+    .nav_messages_top_fixe {
+        animation: none;
+    }
+
+    .chat_display_top_fixed {
+        animation: none;
+    }
+
+    .chat_display {
+        width: 100%;
+    }
+
+    .chat_send_events {
+        margin-bottom: 0;
+    }
+
+    .message_display {
+        max-width: 100%;
+    }
+
+    .message-text {
+        max-width: 100%;
+        border: 1px solid red;
+    }
+}

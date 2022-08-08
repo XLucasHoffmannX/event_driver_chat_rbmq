@@ -1,17 +1,10 @@
-import express, { json, urlencoded } from 'express';
-import cors from 'cors';
 import queueRabbit from './routes/events/queueRabbit';
-
-/* application */
-const app = express();
-
-/* middleware */
-app.use(json());
-app.use(cors());
+import { serverHttp } from './routes/web-socket/http';
+import './routes/web-socket/websocket'; 
 
 /* routes and events */
-queueRabbit;
+// queueRabbit;
 
 /* listen */
 const PORT = process.env.PORT || 3040;
-app.listen(PORT, ()=> console.log(`Server listening on ${PORT}`));
+serverHttp.listen(PORT, ()=> console.log(`Server listening on ${PORT} \n`));

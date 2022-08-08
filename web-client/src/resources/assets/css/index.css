@@ -1,53 +1,103 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --purple-background: #4361EE;
+    --white: #fff;
+    --text-black: #4F4B4B;
+    --text-place: rgb(161, 161, 161);
+    --border-grey: #ccc;
+    --green-pallete: #06D6A0;
+    --purple-top: #3F37C9;
+    --yellow-pallete: #FFD166;
+}
+
+@import url("./form.css");
+
+* {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-}
-
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes animate-div {
     from {
-        transform: rotate(0deg);
+        opacity: 0;
+        margin-top: -150px;
     }
 
     to {
-        transform: rotate(360deg);
+        opacity: 1;
+        margin-top: 0px;
     }
+}
+
+@keyframes up {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes down {
+    from {
+        opacity: 0;
+        transform: translateY(-1.2rem);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes left {
+    from {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+input, textarea{
+    outline: none;
+    border: 0;
+}
+
+ul, ol {
+    list-style: none;
+    margin: 0 !important;
+}
+
+h1, h2, p, span {
+    color: var(--text-black);
+    margin: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+#container_app {
+    height: 100vh;
+    width: 100vw;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }

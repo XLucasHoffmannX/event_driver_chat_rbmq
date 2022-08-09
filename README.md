@@ -11,4 +11,5 @@
     <li>Emoji area realizar evento</li>
     <li>Criar endpoint de autenticação</li>
     <li>Adicionar função onde se a pessoa nao tem foto pegar a inicial do primeiro nome</li>
+    <li>Endpoint de autenticação criar maneira de autenticar tanto com email quanto com username</li>
 </ul>

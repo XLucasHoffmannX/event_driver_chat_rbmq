@@ -1,11 +1,13 @@
-import React, { createContext } from 'react'
+import React, { createContext } from 'react';
+import Cookies from 'js-cookie';
+import NotifyApi from '../app/api/NotifyApi';
+import { UserApi } from '../app/api/UserApi';
 
 export const ContextState = createContext({});
 
-
-interface ContactInfoInterface{
-    name: string,
-    username: string
+interface ContactInfoInterface {
+  name: string,
+  username: string
 }
 
 export default function DataProvider({ children }: any) {
@@ -13,10 +15,13 @@ export default function DataProvider({ children }: any) {
   const [contactInfo, setContactInfo] = React.useState<ContactInfoInterface>();
 
   React.useEffect(() => {
+    setToken(Cookies.get('access-token'));
   }, [token, setToken])
 
   const state = {
-    contactInfo: [contactInfo, setContactInfo]
+    userApi: UserApi(token),
+    contactInfo: [contactInfo, setContactInfo],
+    notifyGeral: NotifyApi()
   }
 
   return (

@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 interface AxiosConfig {
     headers?: any;
@@ -18,7 +19,7 @@ export const HttpAuth = axios.create({
 /* request */
 HttpAuth.interceptors.request.use(
     async (config: AxiosConfig) => {
-        config.headers.authorization = `Bearer ${await localStorage.getItem('access_token')}`;
+        config.headers.authorization = `${Cookies.get('access_token')}`;
 
         return config;
     }
@@ -30,7 +31,7 @@ HttpAuth.interceptors.response.use(res => { return res }, error => {
         if (error.response.status === 401) {
             localStorage.removeItem('access_token');
 
-            window.location.replace('login');
+            window.location.replace('/');
         }
     }
 })

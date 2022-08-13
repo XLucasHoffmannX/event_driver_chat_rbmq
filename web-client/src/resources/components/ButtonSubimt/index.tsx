@@ -7,7 +7,7 @@ interface ButtonInterface{
 export default function ButtonSubmit({title} : ButtonInterface) {
   return (
     <div className='form_content btn_final_div'>
-      <button className='button_submit'>{title}</button>
+      <button type='submit' className='button_submit'>{title}</button>
     </div>
   )
 }

@@ -126,7 +126,15 @@
     margin: .7rem 0;
 
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+}
+
+.friend_contact .friend_contact_control{
+    display: flex;
+    align-items: center;
+    animation: left .5s;
 }
 
 .friend_contact:last-child {
@@ -166,6 +174,23 @@
     text-overflow: ellipsis;
 }
 
+.divisor_contact{
+    margin: .5rem 0;
+    color: var(--white);
+}
+
+.contacts_geral_add_friend svg{
+    color: var(--white);
+    width: 26px;
+    height: 26px;
+}
+
+.contacts_geral_search input{
+    width: 100%;
+    margin: .8rem 0;
+
+}
+
 /* chat_display */
 .chat_display {
     width: 100%;
@@ -179,7 +204,6 @@
 .chat_display_top_fixed {
     height: 70px;
     background-color: var(--purple-top);
-    animation: down .5s;
 }
 
 /* chat_display_area */
@@ -202,7 +226,6 @@
     justify-content: flex-end;
     padding: 1.5rem;
     overflow-y: auto;
-    animation: up .5s;
 }
 
 .message-row {
@@ -235,7 +258,7 @@
 }
 
 .you-message .message-text {
-    background-color: #00BFA5;
+    background-color: #6E00FF;
     color: #fff;
     border-radius: 10px 0 10px 10px
 }

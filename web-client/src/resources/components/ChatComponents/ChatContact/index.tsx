@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Avatar } from '@material-ui/core';
-import { HiOutlineBookmark } from 'react-icons/hi';
+import { HiOutlineBookmark, HiMenu } from 'react-icons/hi';
 import { ContextState } from '../../../../context/DataProvider';
 
 
@@ -10,8 +10,8 @@ export default function ChatContact() {
     const [contactInfo] = state.contactInfo;
 
 
-    React.useEffect(()=>{
-        const getInfoContact = ()=>{
+    React.useEffect(() => {
+        const getInfoContact = () => {
             setFriendInfo(contactInfo);
         }
         getInfoContact();

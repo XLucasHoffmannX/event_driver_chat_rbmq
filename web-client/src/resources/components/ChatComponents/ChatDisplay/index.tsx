@@ -6,7 +6,7 @@ import ChatEmojiArea from '../ChatEmojiArea';
 import ChatSend from '../ChatSend';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3040');
+const socket = io();
 
 export default function ChatDisplay() {
 

@@ -4,13 +4,13 @@
     <li>Criar page padrao ao logar no app ✅</li>
     <li>Criar wrapper (foi adicionado função no context)✅</li>
     <li>Autenticação com passport✅</li>
+    <li>Adicionar função onde se a pessoa nao tem foto pegar a inicial do primeiro nome✅</li>
+    <li>Criar endpoint de autenticação✅</li>
 </ul>
 <br />
 <h2>Há realizar:</h2>
 <ul>
     <li>Emoji area realizar evento</li>
-    <li>Criar endpoint de autenticação</li>
-    <li>Adicionar função onde se a pessoa nao tem foto pegar a inicial do primeiro nome</li>
     <li>Endpoint de autenticação criar maneira de autenticar tanto com email quanto com username</li>
     <li>Rodar migrations e testar o trim do banco</li>
 </ul>

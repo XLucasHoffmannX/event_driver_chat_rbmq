@@ -10,7 +10,9 @@
 <br />
 <h2>Há realizar:</h2>
 <ul>
-    <li>Emoji area realizar evento</li>
-    <li>Endpoint de autenticação criar maneira de autenticar tanto com email quanto com username</li>
+    <li>Criar Wrapper</li>
+    <li>O atributo accepet de cada amizade deve possui tres valores (0, 1, 3) e nao 2 somente</li>
     <li>Rodar migrations e testar o trim do banco</li>
+    <li>Endpoint de autenticação criar maneira de autenticar tanto com email quanto com username</li>
+    <li>Emoji area realizar evento</li>
 </ul>

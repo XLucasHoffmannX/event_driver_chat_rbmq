@@ -13,7 +13,7 @@ export default function RouteBrowser() {
     const state: any = useContext(ContextState);
 
     React.useEffect(()=>{
-        console.log(state);
+        /* console.log(state); */
     }, [state])
 
     return (

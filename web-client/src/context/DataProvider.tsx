@@ -7,7 +7,9 @@ export const ContextState = createContext({});
 
 interface ContactInfoInterface {
   name: string,
-  username: string
+  username: string,
+  image: string,
+  id: string
 }
 
 export default function DataProvider({ children }: any) {

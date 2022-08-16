@@ -1,0 +1,66 @@
+.modal_confirmation_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem;
+}
+
+.modal_confirmation_close{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: .5rem .3rem;
+}
+
+.modal_confirmation_close svg{
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--red);
+}
+
+.modal_confirmation_title h1{
+    text-align: center;
+    font-size: 28px;
+}
+
+.modal_confirmation_image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 285px;
+}
+
+.modal_confirmation_button_confirm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_confirmation_button_confirm span{
+    height: 55px;
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: var(--green-pallete);
+    color: var(--white);
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.modal_confirmation_button_confirm span:hover{
+    transform: scale(1.015);
+}
+
+.modal_confirmation_button_confirm p{
+    font-size: 14px;
+    color: var(--red);
+}
+
+@media(max-width: 700px) {
+    .modal_confirmation_title{
+        margin-top: 2rem;
+        margin-bottom: .2rem;
+    }
+}

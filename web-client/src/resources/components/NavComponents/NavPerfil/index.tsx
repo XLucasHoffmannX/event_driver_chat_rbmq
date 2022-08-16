@@ -21,7 +21,7 @@ const NavPerfil: React.FC = () => {
                 setFirstLetter(firstLetter.charAt());
             }
         }
-    });
+    }, [firstLetter, userData.name]);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);

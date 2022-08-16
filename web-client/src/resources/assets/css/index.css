@@ -9,6 +9,7 @@
     --green-pallete: #06D6A0;
     --purple-top: #3F37C9;
     --yellow-pallete: #FFD166;
+    --red: #FF002B;
 }
 
 @import url("./form.css");

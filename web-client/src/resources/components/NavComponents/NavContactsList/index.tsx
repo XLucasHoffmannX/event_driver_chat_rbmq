@@ -5,6 +5,7 @@ import { ContextState } from '../../../../context/DataProvider';
 import './contact_list.css';
 import { HttpAuth } from '../../../../app/config/Http';
 import FriendListGeral from '../FriendsList/FriendListGeral';
+import Status from '../../Status';
 
 export default function ContactsList({ open, setOpen, confirmationModal, setConfirmationModal }: any) {
     const state: any = useContext(ContextState);
@@ -86,7 +87,7 @@ export default function ContactsList({ open, setOpen, confirmationModal, setConf
                                         <div className='friend_contact_control'>
                                             <div className="nav_messages_top_fixe_control" >
                                                 <Avatar className='friend_contact_avatar' src={friend.image} ></Avatar>
-                                                <span className="friend_contact_badge rounded-circle" style={{ backgroundColor: "var(--green-pallete)" }}></span>
+                                                <Status userId={friend.id} />
                                             </div>
                                             <div className='friend_contact_name'>
                                                 <span>{friend.name}</span>

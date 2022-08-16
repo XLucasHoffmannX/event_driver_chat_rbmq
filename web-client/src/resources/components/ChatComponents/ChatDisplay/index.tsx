@@ -4,21 +4,22 @@ import PageInit from '../../PageInit';
 import ChatContact from '../ChatContact';
 import ChatEmojiArea from '../ChatEmojiArea';
 import ChatSend from '../ChatSend';
-import io from 'socket.io-client';
 import Message from '../../Messages/Message';
 
-const socket = io('http://localhost:3040');
-
-export default function ChatDisplay() {
+export default function ChatDisplay({ socket }: any) {
     const state: any = useContext(ContextState);
 
-    const [messageData, setMessageData] = React.useState<any[]>([]);
-
-    const [statePage, setStatePage] = React.useState<boolean>(false);
     const [contactInfo] = state.contactInfo;
+    const [userAuth] = state.userApi.user;
+
+    const [messageData, setMessageData] = React.useState<any[]>([]);
+    const [statePage, setStatePage] = React.useState<boolean>(false);
     const [room, setRoom] = React.useState<any>();
 
     React.useEffect(() => {
+        if (userAuth.id !== undefined) {
+            socket.emit('status', userAuth.id);
+        }
         const changeState = () => {
             if (contactInfo !== undefined) {
                 setStatePage(true);
@@ -27,7 +28,9 @@ export default function ChatDisplay() {
             };
         };
         changeState();
-    }, [contactInfo, statePage, room, messageData]);
+
+    // eslint-disable-next-line
+    }, [contactInfo, statePage, room, messageData, userAuth.id, socket]);
 
     const joinRoom = (room: any) => {
         socket.emit("join_room", room);

@@ -13,7 +13,7 @@ export default function RouteBrowser() {
     const state: any = useContext(ContextState);
 
     React.useEffect(()=>{
-        /* console.log(state.contactInfo); */
+        //console.log(state);
     }, [state])
 
     return (

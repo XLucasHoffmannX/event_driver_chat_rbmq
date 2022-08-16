@@ -16,6 +16,12 @@ io.on("connection", (socket) => {
         socket.to(data.room).emit("receive_message", data);
     });
 
+    /* online user */
+    socket.on('status', (data)=>{
+        socket.broadcast.emit('sendToAll', data);
+        console.log('status on', data)
+    })
+
     /* desconect conection info */
     socket.on("disconnect", () => {
         console.log(`CONEXAO PERDIDA: ${socket.id} \n`);

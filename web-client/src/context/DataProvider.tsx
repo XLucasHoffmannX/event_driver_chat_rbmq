@@ -9,7 +9,8 @@ interface ContactInfoInterface {
   name: string,
   username: string,
   image: string,
-  id: string
+  id: string,
+  private_room: string
 }
 
 export default function DataProvider({ children }: any) {

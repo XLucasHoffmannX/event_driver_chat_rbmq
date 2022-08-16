@@ -5,30 +5,34 @@ import ChatContact from '../ChatContact';
 import ChatEmojiArea from '../ChatEmojiArea';
 import ChatSend from '../ChatSend';
 import io from 'socket.io-client';
+import Message from '../../Messages/Message';
 
-const socket = io();
+const socket = io('http://localhost:3040');
 
 export default function ChatDisplay() {
-
-    const room = 1;
     const state: any = useContext(ContextState);
+
+    const [messageData, setMessageData] = React.useState<any[]>([]);
+
     const [statePage, setStatePage] = React.useState<boolean>(false);
     const [contactInfo] = state.contactInfo;
+    const [room, setRoom] = React.useState<any>();
 
     React.useEffect(() => {
         const changeState = () => {
             if (contactInfo !== undefined) {
                 setStatePage(true);
+                setRoom(contactInfo.private_room);
+                if (room !== undefined) joinRoom(room);
             };
         };
         changeState();
-    }, [contactInfo, statePage]);
-    
-    const joinRoom = () => {
+    }, [contactInfo, statePage, room, messageData]);
+
+    const joinRoom = (room: any) => {
         socket.emit("join_room", room);
     };
-    joinRoom();
-    
+
     return (
         <div className='chat_container'>
             {
@@ -37,27 +41,24 @@ export default function ChatDisplay() {
                         <ChatContact />
                         <div className='chat_display_area'>
                             <div className='message_display'>
-                                <div className='message_row other-message'>
-                                    <div className='message-title'>Roberto</div>
-                                    <div className='message-text'>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis repudiandae porro! Id assumenda itaque veritatis illo earum, eius maxime neque ratione at! Eos soluta omnis officiis quidem dolore saepe.
-                                    </div>
-                                    <div className='message-time'>
-                                        15:00
-                                    </div>
-                                </div>
-                                <div className='message_row you-message'>
-                                    <div className='message-text'>
-                                        Ola tudo bem?
-                                    </div>
-                                    <div className='message-time'>
-                                        15:00
-                                    </div>
-                                </div>
+                                <>
+                                    {
+                                        messageData.map((messageContent, id) => (
+                                            <Message
+                                                other={contactInfo.username === messageContent.author ? false : true}
+                                                messageContent={messageContent.message.message}
+                                                time={messageContent.time}
+                                                key={id}
+                                            />
+                                        ))
+                                    }
+                                </>
                             </div>
                         </div>
                         <ChatEmojiArea />
-                        <ChatSend socket={socket} username={'Lucas'} room={room} />
+                        <ChatSend socket={socket} username={contactInfo.username ? contactInfo.username : ''} room={room}
+                            messageList={messageData} setMessageList={setMessageData}
+                        />
                     </div>
                     :
                     <PageInit />

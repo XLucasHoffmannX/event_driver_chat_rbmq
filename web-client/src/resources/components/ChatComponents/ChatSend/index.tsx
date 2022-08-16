@@ -2,14 +2,16 @@ import React, { SyntheticEvent } from 'react'
 import { RiSendPlane2Line } from 'react-icons/ri';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import changeInputRecursive from '../../../../app/helpers/ChangeInputRecursive';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function ChatSend({ socket, username, room }: any) {
+export default function ChatSend({ socket, username, room, messageList, setMessageList }: any) {
     const [emojiPicker, setEmojiPicker] = React.useState(false);
     /* eslint-disable */
     const [emojiText, setEmojiText] = React.useState('');
     const [currentMessage, setCurrentMessage] = React.useState<any>({
         message: ''
     })
+    //const [messageList, setMessageList] = React.useState<any []>([]);
 
     const changeInput = (e: SyntheticEvent) => changeInputRecursive(e, currentMessage, setCurrentMessage);
 
@@ -18,6 +20,7 @@ export default function ChatSend({ socket, username, room }: any) {
             const messageData = {
                 room: room,
                 author: username,
+                key: uuidv4(),
                 message: currentMessage,
                 time:
                     new Date(Date.now()).getHours() +
@@ -26,13 +29,15 @@ export default function ChatSend({ socket, username, room }: any) {
             };
 
             await socket.emit("send_message", messageData);
-            setCurrentMessage({message: ''});
+            setMessageList((list: any) => [...list, messageData]);
+            setCurrentMessage({ message: '' });
         }
     }
 
     React.useEffect(() => {
         socket.on("receive_message", (data: any) => {
-            console.log(data);
+            setMessageList((list: any) => [...list, data]);
+            console.log(messageList)
         });
     }, [socket]);
 
@@ -45,7 +50,7 @@ export default function ChatSend({ socket, username, room }: any) {
                     />
                 </div>
                 <div className='message_input_display'>
-                    <textarea className='input_message' placeholder='Digite sua mensagem'
+                    <input type="text" className='input_message' placeholder='Digite sua mensagem'
                         value={currentMessage.message}
                         name='message'
                         onChange={changeInput}

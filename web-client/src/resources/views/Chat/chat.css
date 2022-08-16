@@ -220,7 +220,7 @@
 
 .message_display {
     min-height: 100%;
-    max-width: 78vw;
+    width: min(100%, 78vw);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

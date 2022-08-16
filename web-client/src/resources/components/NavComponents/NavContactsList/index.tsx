@@ -11,7 +11,6 @@ export default function ContactsList({ open }: any) {
     const [myFriends, setMyFriends] = React.useState<any[]>([]);
     const [allUsers, setAllUsers] = React.useState<any[]>([]);
     const [load, setLoad] = React.useState(false);
-    const [load2, setLoad2] = React.useState(false);
 
     // eslint-disable-next-line
     const [contactInfo, setContactInfo] = state.contactInfo;
@@ -29,13 +28,13 @@ export default function ContactsList({ open }: any) {
         };
 
         const getDataAllUsers = async () => {
-            setLoad2(true);
+            setLoad(true);
 
             const res = await HttpAuth.get('/user-end');
 
             if (res.data) {
                 setAllUsers(res.data.data);
-                setLoad2(false);
+                setLoad(false);
             };
         }
 
@@ -48,7 +47,8 @@ export default function ContactsList({ open }: any) {
             name: el.name,
             username: el.username,
             image: el.image,
-            id: el.id
+            id: el.id,
+            private_room: el.private_room
         });
     }
 
@@ -63,12 +63,12 @@ export default function ContactsList({ open }: any) {
                 {
                     open ?
                         /* Geral Contacts */
-                        load2 ?
+                        load ?
                             <>Carregando usuários</>
                             :
-                            allUsers.map((user: any) => (
-                                < >
-                                    <div className='friend_contact contacts_geral' onClick={() => handleClickGetInfo(user)} key={user.id}>
+                            allUsers.map((user: any, id) => (
+                                <>
+                                    <div className='friend_contact contacts_geral' onClick={() => handleClickGetInfo(user)} key={id}>
                                         <div className='friend_contact_control'>
                                             <div className="nav_messages_top_fixe_control" >
                                                 <Avatar className='friend_contact_avatar'src={user.image} >F</Avatar>

@@ -18,8 +18,8 @@ class CreateFriendsTable extends Migration
 
             $table->uuid('user_id');
             $table->uuid('friend_id');
-            $table->uuid('private_room')->unique();
-            $table->boolean('accept')->default(false);
+            $table->uuid('private_room');
+            $table->integer('accept')->default(0);
 
             $table->timestamps();
         });

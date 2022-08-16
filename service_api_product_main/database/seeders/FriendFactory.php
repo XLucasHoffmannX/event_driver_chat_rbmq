@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class FriendFactory extends Seeder
+class FriendSeeder extends Seeder
 {
     /**
      * Run the database seeds.

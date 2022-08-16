@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\User;
+use Error;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,11 +37,12 @@ class FriendController extends Controller
     {
         $data = [];
         $user = Auth::user();
-
         $friends = Friend::where('user_id', $user->id)->get();
 
         foreach ($friends as $friend) {
-            array_push($data, User::find($friend->friend_id));
+            $userFriend = User::find($friend->friend_id);
+            $userFriend['private_room'] = $friend->private_room;
+            array_push($data, $userFriend);
         }
 
         return response($data);
@@ -56,27 +58,64 @@ class FriendController extends Controller
     {
         $user = Auth::user();
 
-        $friend_id = $request->get('friend_id');
+        $friendIdRequest = $request->get('friend_id');
 
-        $userExists = User::find($friend_id);
+        $userExists = User::find($friendIdRequest);
 
-        if ($userExists->id == $friend_id) {
-            $friendAlreadyExists = Friend::where('user_id', $user->id)->get();
-
-            if ($friendAlreadyExists[0]->friend_id != $userExists->id) {
-                Friend::create([
-                    "user_id" => Auth::user()->id,
-                    "friend_id" => $friend_id,
-                    "private_room" => Uuid::uuid4()
-                ]);
-            } else {
-                return response()->json(["msg" => "Amizade ja existente!"]);
-            }
-
-            return response(null, Response::HTTP_CREATED);
+        /* verificar se usuario da request existe */
+        if ($userExists == null) {
+            return response()->json(["msg" => "Usuário não encontrado!"], Response::HTTP_BAD_REQUEST);
         }
 
-        return response()->json(["msg" => "Usuário não encontrado!"]);
+        if ($userExists->id == $friendIdRequest) {
+            /* amizade de alguem */
+            $someoneFriend = Friend::where('user_id', $friendIdRequest)->where('friend_id', $user->id)->get();
+            $ownerFriend = Friend::where('user_id', $user->id)->where('friend_id', $friendIdRequest)->get();
+
+            if (count($someoneFriend) == 1 && count($ownerFriend) == 1) {
+                dd('amizade ja existe');
+            } else {
+                $room_private_id_unique = Uuid::uuid4();
+                if (count($someoneFriend) == 0 && count($ownerFriend) == 0) {
+                    $created = Friend::create([
+                        "user_id" => $user->id,
+                        "friend_id" => $friendIdRequest,
+                        "private_room" => $room_private_id_unique
+                    ]);
+                }
+
+                /* nova chamada */
+                $someoneFriend = Friend::where('user_id', $friendIdRequest)->where('friend_id', $user->id)->get();
+                $ownerFriend = Friend::where('user_id', $user->id)->where('friend_id', $friendIdRequest)->get();
+
+                /* amizade friend_id nao existe */
+                if (count($someoneFriend) == 0) {
+                    $ownerFriendAttributes = Friend::where('user_id', $user->id)
+                        ->where('friend_id', $friendIdRequest)->first(["private_room", "user_id", "friend_id"]);
+                    Friend::create([
+                        "user_id" => $ownerFriendAttributes->friend_id,
+                        "friend_id" => $ownerFriendAttributes->user_id,
+                        "private_room" => $room_private_id_unique
+                    ]);
+
+                    return response()->json(["msg" => "Amizade criada"], Response::HTTP_CREATED);
+                }
+                /* amizade user_id nao existe */
+                if (count($ownerFriend) == 0) {
+                    /* verificar meu friend id */
+                    $someoneFriendAttributes = Friend::where('user_id', $friendIdRequest)
+                        ->where('friend_id', $user->id)->first(["private_room", "user_id", "friend_id"]);
+
+                    Friend::create([
+                        "user_id" => $someoneFriendAttributes->friend_id,
+                        "friend_id" => $someoneFriendAttributes->user_id,
+                        "private_room" => $room_private_id_unique
+                    ]);
+
+                    return response()->json(["msg" => "Amizade criada"], Response::HTTP_CREATED);
+                }
+            }
+        }
     }
 
     /**

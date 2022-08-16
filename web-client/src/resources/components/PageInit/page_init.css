@@ -1,0 +1,15 @@
+.page_init_container{
+    width: 100%;
+
+    background: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page_init_container h1, h3{
+    color: var(--purple-top);
+
+    animation: up 1s;
+}

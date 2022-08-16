@@ -1,0 +1,40 @@
+.auth_container{
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--purple-background);
+}
+
+.auth_box_container{
+    width: min(95%, 500px);
+    border-radius: 6px;
+    
+    background: var(--white);
+    box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.25);
+    padding: 2rem 1.2rem;
+
+    animation: left .8s;
+}
+
+.auth_title h1{
+    font-size: 2.2rem;
+}
+
+.auth_title h1, .auth_title span{
+    color: var(--white);
+    animation: left .8s;
+}
+
+.auth_box_title span{
+    font-size: 15px;
+}
+
+.auth_account_link{
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.auth_account_link span{
+    font-size: 15px;
+    font-weight: 500;
+}

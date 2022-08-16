@@ -1,6 +1,6 @@
 <h2>Tasks completas</h2>
 <ul>
-    <li>Correção criação mútua de amizade no endpoint store</li>
+    <li>Correção criação mútua de amizade no endpoint store ✅</li>
     <li>Enviao de mensagens ponto a ponto realizada✅</li>
     <li>Bolar ideia para funcionar o insert do emoji no input ✅</li>
     <li>Criar page padrao ao logar no app ✅</li>

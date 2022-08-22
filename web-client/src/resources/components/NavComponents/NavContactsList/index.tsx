@@ -45,7 +45,6 @@ export default function ContactsList({ open, setOpen, confirmationModal, setConf
     }, [open])
 
     const handleClickGetInfo = (el: any) => {
-        console.log(el);
         setContactInfo({
             name: el.name,
             username: el.username,
@@ -75,11 +74,12 @@ export default function ContactsList({ open, setOpen, confirmationModal, setConf
                                     setConfirmationModal={setConfirmationModal}
                                     userData={user}
                                     setOpen={setOpen}
+                                    key={id}
                                 />
                             ))
                         :
                         load ?
-                            <>Carregando...</>
+                            <p style={{color: "#fff", textAlign: "center"}}>Carregando seus amigos...</p>
                             :
                             myFriends.map((friend: any) => (
                                 <>

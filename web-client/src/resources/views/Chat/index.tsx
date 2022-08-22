@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { HttpAuth } from '../../../app/config/Http';
 import { ContextState } from '../../../context/DataProvider';
 import ChatDisplay from '../../components/ChatComponents/ChatDisplay';
@@ -10,7 +10,7 @@ import './chat.css';
 
 const socket = io('http://localhost:3040');
 
-export default function Chat() {
+function Chat() {
     const state: any = useContext(ContextState);
     // eslint-disable-next-line
     const [userData, setUserData] = state.userApi.user;
@@ -63,3 +63,5 @@ export default function Chat() {
         </div>
     )
 }
+
+export default memo(Chat);

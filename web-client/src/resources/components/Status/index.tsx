@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { ContextState } from '../../../context/DataProvider';
 
-// import { Container } from './styles';
 
-
-export default function Status({ userId }: any) {
+function Status({ userId }: any) {
     const state: any = useContext(ContextState);
     const [offlineUser, setOfflineUser] = React.useState(false);
 
@@ -18,8 +16,8 @@ export default function Status({ userId }: any) {
 
     return (
         <>  
-            {
-                offlineUser && <span className="friend_contact_badge rounded-circle" style={{ backgroundColor: "var(--yellow-pallete)" }}></span>
+           {/*  {
+                offlineUser ? <span className="friend_contact_badge rounded-circle" style={{ backgroundColor: "var(--yellow-pallete)" }}></span> : null
             }
             {  
                 onlineUsers.map((user: any) => (
@@ -31,7 +29,9 @@ export default function Status({ userId }: any) {
                         }
                     </>
                 ))
-            }
+            } */}
         </>
     );
 }
+
+export default Status;

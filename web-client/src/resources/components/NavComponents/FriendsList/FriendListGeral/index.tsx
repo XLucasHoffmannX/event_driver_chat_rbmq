@@ -10,29 +10,34 @@ export default function FriendListGeral({ userData, confirmationModal, setConfir
     const [userClicked, setUserClicked] = React.useState<any>();
     // eslint-disable-next-line
     const [contactInfo, setContactInfo] = state.contactInfo;
+	const setNotify = state.notifyGeral.notify[1];
 
-    React.useEffect(()=>{
+
+    React.useEffect(() => {
         if (confirmationModal.accept && confirm) {
-            if(userClicked.id){
-                const createFriend = async ()=>{
-                    HttpAuth.post('/friend', { friend_id: userClicked.id})
-                        .then(res=>{
-                            setContactInfo({
-                                name: userData.name,
-                                username: userData.username,
-                                image: userData.image,
-                                id: userData.id,
-                                private_room: res.data.private_room
-                            });
+            if (userClicked.id) {
+                const createFriend = async () => {
+                    HttpAuth.post('/friend', { friend_id: userClicked.id })
+                        .then(res => {
+                            if (res) {
+                                setContactInfo({
+                                    name: userData.name,
+                                    username: userData.username,
+                                    image: userData.image,
+                                    id: userData.id,
+                                    private_room: res.data.private_room
+                                });
 
-                            setConfirm(false);
-                            setOpen(false);
-                        }); 
+                                setConfirm(false);
+                                setOpen(false);
+                            }
+                            else setNotify({ open: true, message: 'Amizade já existe!', success: false });
+                        })
                 }
                 createFriend();
             }
         }
-    }, [confirmationModal, confirm, setContactInfo, userData, userClicked, setOpen])
+    }, [confirmationModal, confirm, setContactInfo, userData, userClicked, setOpen, setNotify])
 
     const handleClickGetInfo = (userData: any) => {
         setUserClicked(userData);

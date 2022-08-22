@@ -62,7 +62,7 @@ export default function ConfirmationModal({ confirmationModal, setConfirmationMo
                         </div>
                         <DialogContent>
                             <DialogContentText id="alert-dialog-slide-description">
-                                Após a confirmação você e user estarão conectados.
+                                Após a confirmação vocês estarão conectados.
                             </DialogContentText>
                         </DialogContent>
                         <div className='modal_confirmation_button_confirm'>

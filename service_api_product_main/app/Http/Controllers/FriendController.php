@@ -79,7 +79,7 @@ class FriendController extends Controller
             $ownerFriend = Friend::where('user_id', $user->id)->where('friend_id', $friendIdRequest)->get();
 
             if (count($someoneFriend) == 1 && count($ownerFriend) == 1) {
-                dd('amizade ja existe');
+                return response()->json(["msg" => "Amizade já existente!"], Response::HTTP_BAD_REQUEST);
             } else {
                 $room_private_id_unique = Uuid::uuid4();
                 if (count($someoneFriend) == 0 && count($ownerFriend) == 0) {

@@ -27,6 +27,7 @@ export default function Login() {
 		await Http.post("/auth", {
 			...inputData
 		}).then(res => {
+			localStorage.setItem('primaryLogin', 'true');
 			if (res.status === 201 || res.status === 200) setRedierect(true);
 		}).catch(error => {
 			setNotify({ open: true, message: 'Ocorreu um erro ao entrar!', success: false });

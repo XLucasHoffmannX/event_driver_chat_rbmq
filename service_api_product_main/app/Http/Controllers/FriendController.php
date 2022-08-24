@@ -132,7 +132,18 @@ class FriendController extends Controller
      */
     public function show($id)
     {
-        //
+        $friendShow = Friend::find($id);
+        if ($friendShow) {
+            return response($friendShow, Response::HTTP_OK);
+        } else {
+            $privateRoomShow = Friend::where("private_room", $id)->get();
+
+            if (count($privateRoomShow) > 1) {
+                return response($privateRoomShow, Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(["msg" => "id ou private não encontrado!"], Response::HTTP_BAD_REQUEST);
     }
 
     /**

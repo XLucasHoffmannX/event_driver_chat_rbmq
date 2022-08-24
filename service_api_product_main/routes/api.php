@@ -2,12 +2,19 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/cmessage', [MessageController::class, 'storeCreate']);
+
+Route::get('/status', function () {
+    return response('ok');
+});
 
 Route::group([
     'middleware' => 'auth:api',
@@ -23,6 +30,9 @@ Route::group([
 
     Route::get('mfriend', [FriendController::class, 'getFriendsUser']);
     Route::get('lisfriends', [FriendController::class, 'listFriendsUser']);
+    Route::get('listmessages/{room}', [MessageController::class, 'messageList']);
 
     Route::apiResource('friend', FriendController::class);
+
+    Route::apiResource('message', MessageController::class);
 });

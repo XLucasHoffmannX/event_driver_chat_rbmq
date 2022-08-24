@@ -16,7 +16,6 @@ export default function ContactsList({ open, setOpen, confirmationModal, setConf
     // eslint-disable-next-line
     const [contactInfo, setContactInfo] = state.contactInfo;
 
-
     React.useEffect(() => {
         const getData = async () => {
             setLoad(true);

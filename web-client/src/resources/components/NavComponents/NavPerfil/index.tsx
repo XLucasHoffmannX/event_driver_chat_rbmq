@@ -64,6 +64,7 @@ const NavPerfil: React.FC = () => {
                         await HttpAuth.post("/logout").then(res=> {
                             if(res.status === 200) window.location.href = '/'
                         });
+                        localStorage.removeItem('primaryLogin');
                     }}>Sair</MenuItem>
                 </Menu>
             </div>

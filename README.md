@@ -1,5 +1,6 @@
 <h2>Tasks completas</h2>
 <ul>
+    <li>Correção criar amizade com o mesmo id✅</li>
     <li>Correção criação mútua de amizade no endpoint store ✅</li>
     <li>Envio de mensagens ponto a ponto realizada✅</li>
     <li>Bolar ideia para funcionar o insert do emoji no input ✅</li>

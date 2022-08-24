@@ -1,15 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { HttpAuth } from '../../../app/config/Http';
 import { ContextState } from '../../../context/DataProvider';
 import ChatDisplay from '../../components/ChatComponents/ChatDisplay';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import Nav from '../../components/NavComponents/Nav';
+import io from 'socket.io-client';
 
 import './chat.css';
 
-export default function Chat() {
+const socket = io('http://localhost:3040');
+
+function Chat() {
     const state: any = useContext(ContextState);
     // eslint-disable-next-line
     const [userData, setUserData] = state.userApi.user;
+    const [contactInfo] = state.contactInfo;
+    // eslint-disable-next-line
+    const [onlineUsers, setOnlineUsers] = state.usersOnline.online;
+
+    const [openConfirmationModal, setOpenConfirmationModal] = React.useState<any>({
+        accept: false,
+        open: false
+    });
 
     React.useEffect(() => {
         const getUser = async () => {
@@ -17,18 +29,39 @@ export default function Chat() {
                 const res = await HttpAuth.get('/user');
 
                 setUserData(res.data);
+                socket.on('sendToAll', (data) => {
+                    if (data !== res.data.id) {
+                        if (data !== null) {
+                            setOnlineUsers((list:any)=> [...list, data]);
+                        }
+                    }
+                });
             } catch (error) {
                 if (error) throw error;
             }
         }
 
         getUser();
-    }, [setUserData]);
+    }, [setUserData, openConfirmationModal, contactInfo, setOnlineUsers]);
 
     return (
         <div className='chat_container'>
-            <Nav />
-            <ChatDisplay />
+            <Nav
+                confirmationModal={openConfirmationModal}
+                setConfirmationModal={setOpenConfirmationModal}
+            />
+            <ChatDisplay
+                socket={socket}
+            />
+
+            {openConfirmationModal.open ?
+                <ConfirmationModal
+                    confirmationModal={openConfirmationModal}
+                    setConfirmationModal={setOpenConfirmationModal}
+                />
+                : null}
         </div>
     )
 }
+
+export default memo(Chat);

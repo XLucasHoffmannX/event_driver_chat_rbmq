@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Avatar } from '@material-ui/core';
 import { ContextState } from '../../../../context/DataProvider';
-import { HiOutlinePlusSm } from 'react-icons/hi';
 
 import './contact_list.css';
 import { HttpAuth } from '../../../../app/config/Http';
+import FriendListGeral from '../FriendsList/FriendListGeral';
+import Status from '../../Status';
 
-export default function ContactsList({ open }: any) {
+export default function ContactsList({ open, setOpen, confirmationModal, setConfirmationModal }: any) {
     const state: any = useContext(ContextState);
     const [myFriends, setMyFriends] = React.useState<any[]>([]);
     const [allUsers, setAllUsers] = React.useState<any[]>([]);
@@ -38,9 +39,9 @@ export default function ContactsList({ open }: any) {
             };
         }
 
-        getDataAllUsers();
-        getData();
-    }, [])
+        if(open) getDataAllUsers()
+        else getData();
+    }, [open])
 
     const handleClickGetInfo = (el: any) => {
         setContactInfo({
@@ -67,27 +68,17 @@ export default function ContactsList({ open }: any) {
                             <>Carregando usuários</>
                             :
                             allUsers.map((user: any, id) => (
-                                <>
-                                    <div className='friend_contact contacts_geral' onClick={() => handleClickGetInfo(user)} key={id}>
-                                        <div className='friend_contact_control'>
-                                            <div className="nav_messages_top_fixe_control" >
-                                                <Avatar className='friend_contact_avatar'src={user.image} >F</Avatar>
-                                                <span className="friend_contact_badge rounded-circle" style={{ backgroundColor: "var(--green-pallete)" }}></span>
-                                            </div>
-                                            <div className='friend_contact_name'>
-                                                <span>{user.name}</span>
-                                            </div>
-                                        </div>
-                                        <div className="contacts_geral_add_friend">
-                                            <HiOutlinePlusSm />
-                                        </div>
-                                    </div>
-                                    <hr className='divisor_contact' />
-                                </>
+                                <FriendListGeral
+                                    confirmationModal={confirmationModal}
+                                    setConfirmationModal={setConfirmationModal}
+                                    userData={user}
+                                    setOpen={setOpen}
+                                    key={id}
+                                />
                             ))
                         :
                         load ?
-                            <>Carregando...</>
+                            <p style={{color: "#fff", textAlign: "center"}}>Carregando seus amigos...</p>
                             :
                             myFriends.map((friend: any) => (
                                 <>
@@ -95,7 +86,7 @@ export default function ContactsList({ open }: any) {
                                         <div className='friend_contact_control'>
                                             <div className="nav_messages_top_fixe_control" >
                                                 <Avatar className='friend_contact_avatar' src={friend.image} ></Avatar>
-                                                <span className="friend_contact_badge rounded-circle" style={{ backgroundColor: "var(--green-pallete)" }}></span>
+                                                <Status userId={friend.id} />
                                             </div>
                                             <div className='friend_contact_name'>
                                                 <span>{friend.name}</span>

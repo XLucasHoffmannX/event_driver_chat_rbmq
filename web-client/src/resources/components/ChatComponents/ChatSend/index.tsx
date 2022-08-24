@@ -11,7 +11,6 @@ export default function ChatSend({ socket, username, room, messageList, setMessa
     const [currentMessage, setCurrentMessage] = React.useState<any>({
         message: ''
     })
-    //const [messageList, setMessageList] = React.useState<any []>([]);
 
     const changeInput = (e: SyntheticEvent) => changeInputRecursive(e, currentMessage, setCurrentMessage);
 

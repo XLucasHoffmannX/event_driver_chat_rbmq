@@ -58,9 +58,15 @@ class FriendController extends Controller
     {
         $user = Auth::user();
 
-        $friendIdRequest = $request->get('friend_id');
+        $friendIdRequest = $request->only('friend_id');
+        $friendIdRequest = $friendIdRequest['friend_id'];
 
         $userExists = User::find($friendIdRequest);
+
+        if ($user->id == $friendIdRequest) {
+            return response()
+                ->json(["msg" => "Não é possível criar amizade com você mesmo!"], Response::HTTP_BAD_REQUEST);
+        }
 
         /* verificar se usuario da request existe */
         if ($userExists == null) {
@@ -73,11 +79,11 @@ class FriendController extends Controller
             $ownerFriend = Friend::where('user_id', $user->id)->where('friend_id', $friendIdRequest)->get();
 
             if (count($someoneFriend) == 1 && count($ownerFriend) == 1) {
-                dd('amizade ja existe');
+                return response()->json(["msg" => "Amizade já existente!"], Response::HTTP_BAD_REQUEST);
             } else {
                 $room_private_id_unique = Uuid::uuid4();
                 if (count($someoneFriend) == 0 && count($ownerFriend) == 0) {
-                    $created = Friend::create([
+                    Friend::create([
                         "user_id" => $user->id,
                         "friend_id" => $friendIdRequest,
                         "private_room" => $room_private_id_unique
@@ -92,13 +98,13 @@ class FriendController extends Controller
                 if (count($someoneFriend) == 0) {
                     $ownerFriendAttributes = Friend::where('user_id', $user->id)
                         ->where('friend_id', $friendIdRequest)->first(["private_room", "user_id", "friend_id"]);
-                    Friend::create([
+                    $friendCreated = Friend::create([
                         "user_id" => $ownerFriendAttributes->friend_id,
                         "friend_id" => $ownerFriendAttributes->user_id,
                         "private_room" => $room_private_id_unique
                     ]);
 
-                    return response()->json(["msg" => "Amizade criada"], Response::HTTP_CREATED);
+                    return response()->json($friendCreated, Response::HTTP_CREATED);
                 }
                 /* amizade user_id nao existe */
                 if (count($ownerFriend) == 0) {
@@ -106,13 +112,13 @@ class FriendController extends Controller
                     $someoneFriendAttributes = Friend::where('user_id', $friendIdRequest)
                         ->where('friend_id', $user->id)->first(["private_room", "user_id", "friend_id"]);
 
-                    Friend::create([
+                    $friendCreated = Friend::create([
                         "user_id" => $someoneFriendAttributes->friend_id,
                         "friend_id" => $someoneFriendAttributes->user_id,
                         "private_room" => $room_private_id_unique
                     ]);
 
-                    return response()->json(["msg" => "Amizade criada"], Response::HTTP_CREATED);
+                    return response()->json($friendCreated, Response::HTTP_CREATED);
                 }
             }
         }
@@ -126,7 +132,18 @@ class FriendController extends Controller
      */
     public function show($id)
     {
-        //
+        $friendShow = Friend::find($id);
+        if ($friendShow) {
+            return response($friendShow, Response::HTTP_OK);
+        } else {
+            $privateRoomShow = Friend::where("private_room", $id)->get();
+
+            if (count($privateRoomShow) > 1) {
+                return response($privateRoomShow, Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(["msg" => "id ou private não encontrado!"], Response::HTTP_BAD_REQUEST);
     }
 
     /**

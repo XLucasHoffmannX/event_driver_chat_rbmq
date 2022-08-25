@@ -20,6 +20,8 @@ export const HttpAuth = axios.create({
 HttpAuth.interceptors.response.use(res => { return res }, error => {
     if (error.response) {
         if (error.response.status === 401) {
+            localStorage.removeItem('primaryLogin');
+            Cookies.remove('jwt', {path: "/", domain: "localhost"});
             window.location.replace('/login');
         }
     }

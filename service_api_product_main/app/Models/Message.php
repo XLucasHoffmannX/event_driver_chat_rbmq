@@ -10,6 +10,8 @@ class Message extends Model
 {
     use HasFactory, Uuids;
 
+    protected $table = "messages";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +20,7 @@ class Message extends Model
     protected $fillable = [
         'user_id',
         'private_room',
-        'message_text'
+        'message_text',
+        'type'
     ];
 }

@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->uuid('private_room');
             $table->uuid('user_id');
             $table->string('message_text');
-
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
     }

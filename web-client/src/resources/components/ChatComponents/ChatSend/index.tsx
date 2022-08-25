@@ -22,6 +22,7 @@ export default function ChatSend({ socket, username, room, messageList, setMessa
                 author: username,
                 key: uuidv4(),
                 message: currentMessage,
+                type: 0,
                 time:
                     new Date(Date.now()).getHours() +
                     ":" +
@@ -31,7 +32,6 @@ export default function ChatSend({ socket, username, room, messageList, setMessa
             await socket.emit("send_message", messageData);
             setMessageList((list: any) => [...list, messageData]);
             setCurrentMessage({ message: '' });
-            console.log(messageData);
         }
     }
 

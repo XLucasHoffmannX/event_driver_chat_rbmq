@@ -1,5 +1,6 @@
 <h2>Tasks completas</h2>
 <ul>
+    <li>Salvar mensagens no banco✅</li>
     <li>Correção criar amizade com o mesmo id✅</li>
     <li>Correção criação mútua de amizade no endpoint store ✅</li>
     <li>Envio de mensagens ponto a ponto realizada✅</li>
@@ -15,8 +16,8 @@
 <br />
 <h2>Há realizar:</h2>
 <ul>
+    <li>Realizar envio de arquivos diversos (.pdf, .zip e arquivos de imagens)</li>
     <li>Criar Wrapper</li>
-    <li>Salvar mensagens no banco</li>
     <li>Realizar as tipagens</li>
     <li>Respository pattern</li>
     <li>Endpoint de autenticação criar maneira de autenticar tanto com email quanto com username</li>

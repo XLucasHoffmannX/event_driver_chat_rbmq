@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { ContextState } from '../../../../context/DataProvider';
 import PageInit from '../../PageInit';
 import ChatContact from '../ChatContact';
-import ChatEmojiArea from '../ChatEmojiArea';
 import ChatSend from '../ChatSend';
 import Message from '../../Messages/Message';
 import { HttpAuth } from '../../../../app/config/Http';
@@ -13,6 +12,7 @@ export default function ChatDisplay({ socket }: any) {
     const [contactInfo] = state.contactInfo;
     const [userAuth] = state.userApi.user;
 
+    const [emojiArea, setEmojiArea] = React.useState(false);
     const [messageData, setMessageData] = React.useState<any[]>([]);
     const [statePage, setStatePage] = React.useState<boolean>(false);
     const [room, setRoom] = React.useState<any>();
@@ -30,7 +30,7 @@ export default function ChatDisplay({ socket }: any) {
             setLoad(false);
         };
     }
-    
+
     React.useEffect(() => {
         setMessageData([]);
         if (userAuth.id !== undefined) {
@@ -38,13 +38,12 @@ export default function ChatDisplay({ socket }: any) {
         }
         const changeState = () => {
             if (contactInfo !== undefined) {
-                console.log(contactInfo);
                 setStatePage(true);
                 setRoom(contactInfo.private_room);
                 getMessages();
                 if (room !== undefined) {
-                    if(!cb){
-                        joinRoom(room);
+                    joinRoom(room);
+                    if (!cb) {
                         setCb(true);
                     }
                 };
@@ -67,39 +66,43 @@ export default function ChatDisplay({ socket }: any) {
                         <div className='chat_display_area'>
                             <div className='message_display'>
                                 {
-                                    load ? 
+                                    load ?
                                         <>carregando...</>
-                                    :
-                                    <>
-                                    {
-                                        messageDataSaved.map((messageContent, id) => (
-                                            <Message
-                                                other={contactInfo.id === messageContent.user_id ? false : true}
-                                                messageContent={messageContent.message_text}
-                                                time={messageContent.time}
-                                                key={id}
-                                            />
-                                        ))
-                                    }
-                                </>
+                                        :
+                                        <>
+                                            {
+                                                messageDataSaved.map((messageContent, id) => (
+                                                    <Message
+                                                        other={contactInfo.id === messageContent.user_id ? false : true}
+                                                        messageContent={messageContent.message_text}
+                                                        time={messageContent.time}
+                                                        key={id}
+                                                    />
+                                                ))
+                                            }
+                                        </>
                                 }
                                 <>
                                     {
-                                        messageData.map((messageContent, id) => (
-                                            <Message
-                                                other={contactInfo.id === messageContent.author ? false : true}
-                                                messageContent={messageContent.message.message}
-                                                time={messageContent.time}
-                                                key={id}
-                                            />
-                                        ))
+                                        messageData.map((messageContent, id) => {
+                                            if (messageContent.room === contactInfo.private_room) {
+                                                return (
+                                                    <Message
+                                                        other={contactInfo.id === messageContent.author ? false : true}
+                                                        messageContent={messageContent.message.message}
+                                                        time={messageContent.time}
+                                                        key={id}
+                                                    />
+                                                )
+                                            }
+                                        })
                                     }
                                 </>
                             </div>
                         </div>
-                        <ChatEmojiArea />
                         <ChatSend socket={socket} username={contactInfo.id ? contactInfo.id : ''} room={room}
                             messageList={messageData} setMessageList={setMessageData}
+                            emojiArea={emojiArea} setEmojiArea={setEmojiArea}
                         />
                     </div>
                     :

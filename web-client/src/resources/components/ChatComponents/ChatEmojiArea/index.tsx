@@ -1,19 +1,18 @@
 import React, { SyntheticEvent } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
-export default function ChatEmojiArea() {
+export default function ChatEmojiArea({emojiArea, currentMessage, setCurrentMessage}: any) {
     /* eslint-disable */
-    const [emojiPicker, setEmojiPicker] = React.useState(false);
     const [emojiText, setEmojiText] = React.useState('');
 
     const handleEmojiPicker = (e: SyntheticEvent, emojiObject: any) => {
-        setEmojiText(emojiText + emojiObject.emoji);
+        setCurrentMessage({message: currentMessage.message+emojiObject.emoji});
     }
 
     return (
         <div className='chat_window_emoji_area'>
             {
-                emojiPicker ?
+                emojiArea ?
                     <EmojiPicker
                         onEmojiClick={handleEmojiPicker}
                     />

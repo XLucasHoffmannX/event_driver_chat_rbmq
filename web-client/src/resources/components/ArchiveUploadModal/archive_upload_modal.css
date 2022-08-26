@@ -1,0 +1,69 @@
+.archive_modal {
+    z-index: 9999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.archive_modal_display{
+    padding: 1rem;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    width: min(400px, 90%);
+    animation: up .5s;
+}
+
+.archive_modal_display input{
+    width: 100%;
+}
+
+.archive_modal_display h2{
+    margin-bottom: 2rem;
+}
+
+.archive_modal_display_close{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.archive_modal_display_close svg{
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.archive_modal_display_close svg:hover{
+    color: var(--red);
+}
+
+.archive_modal_display_send{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.archive_modal_display_send span{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 6px;
+    background: var(--green-pallete);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.archive_modal_display_send span:hover{
+    transform: scale(1.015);
+}

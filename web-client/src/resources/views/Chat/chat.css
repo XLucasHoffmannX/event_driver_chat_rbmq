@@ -301,6 +301,10 @@
     border: 1px solid ble;
 }
 
+.emoji_picker_chat{
+    display: flex;
+}
+
 .emoji_picker_chat svg, .send_picker svg {
     width: 30px;
     height: 30px;
@@ -308,9 +312,29 @@
     cursor: pointer;
 }
 
-.emoji_picker_chat svg:hover, .send_picker svg:hover {
+.emoji_picker_chat svg:hover, .send_picker svg:hover, .archives_control svg:hover {
     color: var(--green-pallete);
 }
+
+.speedial:hover {
+    border: 1px solid var(--green-pallete);
+}
+
+.archives_control{
+    margin-left: 1rem;
+}
+
+.archives_control svg{
+    width: 22px;
+    height: 22px;
+    color: var(--border-grey);
+}
+
+.archives_control .archive_icon{
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}   
 
 .message_input_display {
     width: 100%;

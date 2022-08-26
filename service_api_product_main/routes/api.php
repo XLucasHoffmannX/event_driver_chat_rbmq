@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\MessageController;
@@ -23,7 +24,8 @@ Route::group([
 
     Route::apiResource('user-end', UserController::class);
 
-    /* autenticadas */
+    Route::post('/upload-archive', [ArchiveController::class, 'upload']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/teste', [FriendController::class, 'teste']);

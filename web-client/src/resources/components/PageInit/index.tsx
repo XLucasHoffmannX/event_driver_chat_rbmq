@@ -10,6 +10,7 @@ export default function PageInit() {
         <h3>opensource.</h3>
         <h3>simples.</h3>
         <h3>seguro.</h3>
+        <img src="http://localhost:8000/api/storage/archives/2VPIuBSsRg-20220826.jpg" alt="a"/>
     </div>
   )
 }

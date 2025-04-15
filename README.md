@@ -1,3 +1,5 @@
+<h1>Chat</h1>
+<p>Aplicação voltada para conversa</p>
 <h2>Tasks completas</h2>
 <ul>
     <li>Salvar mensagens no banco✅</li>

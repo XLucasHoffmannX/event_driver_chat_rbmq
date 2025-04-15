@@ -1,3 +1,6 @@
+<h1>Chat</h1>
+<p>Chat para converas entre amigos</p>
+<br />
 <h2>Tasks completas</h2>
 <ul>
     <li>Salvar mensagens no banco✅</li>
